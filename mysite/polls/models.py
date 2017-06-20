@@ -38,7 +38,7 @@ class Bill(models.Model):
 	
 	def __str__(self):
 		#return str(self.city_id)
-		return '%s %s %s به شماره اشتراک%s' % (self.billtype_id, self.place_id, self.city_id, self.subscriber_id)
+		return '%s %s %s  شماره اشتراک%s' % (self.billtype_id, self.place_id, self.city_id, self.subscriber_id)
 
 class Billmonth(models.Model):
 	bill_id = models.ForeignKey(Bill, on_delete = models.CASCADE)
@@ -49,4 +49,4 @@ class Billmonth(models.Model):
 	status = models.IntegerField(default=0)
 	def __str__(self):
 		#return str(self.form_id)
-		return '%s از فرم شماره %s به مبلغ %s ریال' % (self.bill_id, self.form_id, self.price)
+		return '%s از فرم شماره %s به مبلغ %s تومان' % (self.bill_id, self.form_id, self.price)
