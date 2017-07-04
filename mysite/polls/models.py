@@ -13,23 +13,31 @@ class Choice(models.Model):
 # Create your models here.
 
 class City(models.Model):
-	city_name = models.CharField(max_length=50)
+	city_name = models.CharField('نام شهر',max_length=50)
 
 	def __str__(self):
 		return self.city_name
+	class Meta:
+		verbose_name='شهر'
+		verbose_name_plural = '     شهر'
 
 class Placetype(models.Model):
-	placetype_name = models.CharField(max_length=50)
+	placetype_name = models.CharField("نوع مکان",max_length=50)
 
 	def __str__(self):
 		return self.placetype_name
+	class Meta:
+		verbose_name='نوع محل'
+		verbose_name_plural = '    نوع محل'
 
 class Billtype(models.Model):
-	billtype_name = models.CharField(max_length=20)
+	billtype_name = models.CharField('نوع قبض',max_length=20)
 
 	def __str__(self):
 		return self.billtype_name
-
+	class Meta:
+		verbose_name='نوع قبض'
+		verbose_name_plural = '   نوع قبض'
 class Bill(models.Model):
 	city_id = models.ForeignKey(City,on_delete = models.CASCADE)
 	place_id = models.ForeignKey(Placetype,on_delete = models.CASCADE)
@@ -38,7 +46,10 @@ class Bill(models.Model):
 	
 	def __str__(self):
 		#return str(self.city_id)
-		return '%s %s %s  شماره اشتراک%s' % (self.billtype_id, self.place_id, self.city_id, self.subscriber_id)
+		return 'قبض %s متعلق به  %s %s به شماره اشتراک%s' % (self.billtype_id, self.place_id, self.city_id, self.subscriber_id)
+	class Meta:
+		verbose_name='قبض'
+		verbose_name_plural='  تعریف قبض'
 
 class Billmonth(models.Model):
 	bill_id = models.ForeignKey(Bill, on_delete = models.CASCADE)
@@ -50,3 +61,6 @@ class Billmonth(models.Model):
 	def __str__(self):
 		#return str(self.form_id)
 		return '%s از فرم شماره %s به مبلغ %s تومان' % (self.bill_id, self.form_id, self.price)
+	class Meta:
+		verbose_name='قبض'
+		verbose_name_plural=' لیست قبوض'
